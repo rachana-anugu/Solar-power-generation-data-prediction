@@ -1,0 +1,81 @@
+Data Cleaning & Preprocessing Report
+1. Introduction
+
+This report explains the data cleaning and preprocessing steps applied to the dataset spg.csv (uploaded in Google Colab). The purpose of this process was to prepare the dataset for machine learning tasks by removing inconsistencies, handling missing values, transforming variables, and standardizing data.
+
+2. Loading the Dataset
+
+The dataset was uploaded through Google Colab and loaded using pandas.
+
+Key action performed
+
+Uploaded file from local system using files.upload()
+
+Loaded into a pandas DataFrame using pd.read_csv()
+
+3. Data Cleaning
+3.1 Checking Dataset Structure
+
+df.info() and df.head() were used to understand the shape and data types.
+
+3.2 Handling Missing Values
+
+Missing values were identified using df.isnull().sum().
+
+To treat missing values:
+
+Numerical missing values were filled using mean
+
+Categorical missing values were filled using mode
+
+Techniques used:
+
+df = df.fillna(df.mean(numeric_only=True))
+df = df.fillna(df.mode().iloc[0])
+
+3.3 Removing Duplicates
+
+Duplicate rows were removed using:
+
+df.drop_duplicates(inplace=True)
+
+3.4 Standardizing Column Names
+
+Spaces were removed and column names were converted to lowercase to maintain consistency.
+
+4. Data Preprocessing
+4.1 Encoding Categorical Variables
+
+Categorical features were converted into numeric labels using Label Encoding:
+
+from sklearn.preprocessing import LabelEncoder
+
+
+Each text feature was transformed into a numerical form suitable for machine learning models.
+
+4.2 Feature Scaling
+
+To ensure all numerical variables are on the same scale, StandardScaler was used.
+
+This step helps machine learning algorithms converge faster and improves model performance.
+
+from sklearn.preprocessing import StandardScaler
+df[num_cols] = scaler.fit_transform(df[num_cols])
+
+5. Final Output
+
+After completing cleaning and preprocessing:
+
+Dataset contains no missing values
+
+No duplicate records are present
+
+Categorical data converted to numerical
+
+Numerical data normalized for better model performance
+
+Dataset exported as processed_spg.csv
+
+6. Conclusion
+
+The data cleaning and preprocessing stage successfully prepared the dataset for further analysis and modeling. This standardized and structured dataset will now allow performing machine learning tasks with improved accuracy and efficiency.
